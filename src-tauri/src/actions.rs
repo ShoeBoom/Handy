@@ -356,22 +356,26 @@ impl ShortcutAction for TranscribeAction {
                                 }
                             }
 
-                            // Save to history with post-processed text and prompt
-                            let hm_clone = Arc::clone(&hm);
-                            let transcription_for_history = transcription.clone();
-                            tauri::async_runtime::spawn(async move {
-                                if let Err(e) = hm_clone
-                                    .save_transcription(
-                                        samples_clone,
-                                        transcription_for_history,
-                                        post_processed_text,
-                                        post_process_prompt,
-                                    )
-                                    .await
-                                {
-                                    error!("Failed to save transcription to history: {}", e);
-                                }
-                            });
+                            // Save to history with post-processed text and prompt (only if save_history is enabled)
+                            if settings.save_history {
+                                let hm_clone = Arc::clone(&hm);
+                                let transcription_for_history = transcription.clone();
+                                tauri::async_runtime::spawn(async move {
+                                    if let Err(e) = hm_clone
+                                        .save_transcription(
+                                            samples_clone,
+                                            transcription_for_history,
+                                            post_processed_text,
+                                            post_process_prompt,
+                                        )
+                                        .await
+                                    {
+                                        error!("Failed to save transcription to history: {}", e);
+                                    }
+                                });
+                            } else {
+                                debug!("History saving disabled - skipping save_transcription");
+                            }
 
                             // Paste the final text (either processed or original)
                             let ah_clone = ah.clone();

@@ -15,6 +15,7 @@ import { RecordingRetentionPeriodSelector } from "../RecordingRetentionPeriod";
 import { ClamshellMicrophoneSelector } from "../ClamshellMicrophoneSelector";
 import { HandyShortcut } from "../HandyShortcut";
 import { UpdateChecksToggle } from "../UpdateChecksToggle";
+import { SaveHistoryToggle } from "../SaveHistoryToggle";
 import { useSettings } from "../../../hooks/useSettings";
 
 export const DebugSettings: React.FC = () => {
@@ -29,6 +30,7 @@ export const DebugSettings: React.FC = () => {
         <LogDirectory grouped={true} />
         <LogLevelSelector grouped={true} />
         <UpdateChecksToggle descriptionMode="tooltip" grouped={true} />
+        <SaveHistoryToggle descriptionMode="tooltip" grouped={true} />
         <SoundPicker
           label={t("settings.debug.soundTheme.label")}
           description={t("settings.debug.soundTheme.description")}

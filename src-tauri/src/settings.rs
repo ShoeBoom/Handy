@@ -293,6 +293,8 @@ pub struct AppSettings {
     pub append_trailing_space: bool,
     #[serde(default = "default_app_language")]
     pub app_language: String,
+    #[serde(default = "default_save_history")]
+    pub save_history: bool,
 }
 
 fn default_model() -> String {
@@ -438,6 +440,10 @@ fn default_post_process_providers() -> Vec<PostProcessProvider> {
     providers
 }
 
+fn default_save_history() -> bool {
+    true
+}
+
 fn default_post_process_api_keys() -> HashMap<String, String> {
     let mut map = HashMap::new();
     for provider in default_post_process_providers() {
@@ -581,6 +587,7 @@ pub fn get_default_settings() -> AppSettings {
         mute_while_recording: false,
         append_trailing_space: false,
         app_language: default_app_language(),
+        save_history: default_save_history(),
     }
 }
 

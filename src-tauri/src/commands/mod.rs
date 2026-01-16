@@ -68,6 +68,16 @@ pub fn set_log_level(app: AppHandle, level: LogLevel) -> Result<(), String> {
 
 #[specta::specta]
 #[tauri::command]
+pub fn change_save_history_setting(app: AppHandle, enabled: bool) -> Result<(), String> {
+    let mut settings = get_settings(&app);
+    settings.save_history = enabled;
+    write_settings(&app, settings);
+
+    Ok(())
+}
+
+#[specta::specta]
+#[tauri::command]
 pub fn open_recordings_folder(app: AppHandle) -> Result<(), String> {
     let app_data_dir = app
         .path()

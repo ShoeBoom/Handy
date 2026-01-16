@@ -333,6 +333,10 @@
         "months3": "After 3 months",
         "placeholder": "Select retention period..."
       },
+      "saveHistory": {
+        "label": "Save History",
+        "description": "Save recordings and transcription text to history"
+      },
       "alwaysOnMicrophone": {
         "label": "Always-On Microphone",
         "description": "Keep microphone active for faster response"
